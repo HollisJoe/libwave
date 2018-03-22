@@ -10,7 +10,8 @@ WAVE_ADD_MODULE(${PROJECT_NAME} DEPENDS
     src/decaying_bias.cpp
     src/gps_factor_with_bias.cpp
     src/pose_vel_bias.cpp
-    src/motion_factor.cpp)
+    src/motion_factor.cpp
+    src/preintg_imu_factor.cpp)
 
 # Unit tests
 IF(BUILD_TESTING)
@@ -55,5 +56,10 @@ IF(BUILD_TESTING)
     WAVE_ADD_TEST(wave_gtsam_prior_test
             tests/gtsam/prior_tests.cpp)
     TARGET_LINK_LIBRARIES(wave_gtsam_prior_test
+            ${PROJECT_NAME})
+
+    WAVE_ADD_TEST(wave_gtsam_preintg_imu_test
+            tests/gtsam/preintg_imu_factor_test.cpp)
+    TARGET_LINK_LIBRARIES(wave_gtsam_preintg_imu_test
             ${PROJECT_NAME})
 ENDIF(BUILD_TESTING)
